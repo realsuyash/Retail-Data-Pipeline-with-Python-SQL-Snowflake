@@ -1,6 +1,6 @@
 # Retail Sales ETL Pipeline with SQL Performance Layer
 
-A end-to-end data engineering project built on the UCI Online Retail dataset. Demonstrates a dual-database ETL architecture using Python, PostgreSQL, and MS SQL Server — with a dedicated query performance optimization layer showing before/after execution plan comparisons.
+An end-to-end data engineering project built on the UCI Online Retail dataset. Demonstrates a dual-database ETL architecture using Python, PostgreSQL, and MS SQL Server — with a dedicated query performance optimization layer showing before/after execution plan comparisons.
 
 Built to mirror real-world retail data platform work: staging → transformation → star schema → analytical queries → performance tuning.
 
@@ -125,13 +125,13 @@ Install these in order before running anything:
    - Check "Add Python to PATH" during install
 
 2. **PostgreSQL 16** — https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
-   - Remember the password you set for `postgres` user
-   - Create a database called `retail_staging` in pgAdmin after install
+   - Remember the password you set for the `postgres` user
+   - Create a database called `retail_staging` in pgAdmin after installation
 
 3. **MS SQL Server 2022 Developer** — https://www.microsoft.com/en-us/sql-server/sql-server-downloads
    - Choose Basic install type
    - Also install **SSMS** (SQL Server Management Studio) from the same page
-   - Create a database called `retail_analytics` in SSMS after install
+   - Create a database called `retail_analytics` in SSMS after installation
    - In SSMS: right-click server → Properties → Security → enable **SQL Server and Windows Authentication mode** → restart SQL Server service
 
 4. **ODBC Driver 17 for SQL Server** — https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server
@@ -158,20 +158,18 @@ copy .env.example .env      # Windows
 # cp .env.example .env      # Mac/Linux
 ```
 
-Edit `.env` with your actual database credentials:
-
 ```env
 PG_HOST=localhost
 PG_PORT=5432
 PG_DB=retail_staging
 PG_USER=postgres
-PG_PASSWORD=your_postgres_password
+PG_PASSWORD=password
 
 MSSQL_HOST=localhost
 MSSQL_PORT=1433
 MSSQL_DB=retail_analytics
 MSSQL_USER=sa
-MSSQL_PASSWORD=your_mssql_password
+MSSQL_PASSWORD=password
 ```
 
 ---
@@ -184,7 +182,7 @@ MSSQL_PASSWORD=your_mssql_password
 python scripts/extract/extract_clean.py
 ```
 
-Reads `Online Retail.xlsx`, applies cleaning rules, saves `data/cleaned/retail_clean.csv`.
+Reads `Online Retail.xlsx`, applies cleaning rules, and saves `data/cleaned/retail_clean.csv`.
 
 Cleaning operations applied:
 - Drop rows with null CustomerID, Description, Quantity, UnitPrice
@@ -311,7 +309,7 @@ Verify ODBC Driver 17 is installed: open Start → search "ODBC Data Sources (64
 In SSMS: right-click server → Properties → Security → set to "SQL Server and Windows Authentication mode". Then restart SQL Server service via Services app.
 
 **PostgreSQL connection refused**
-Check pgAdmin is running and the `retail_staging` database exists. Verify `.env` password matches what you set during PostgreSQL install.
+Check that pgAdmin is running and the `retail_staging` database exists. Verify `.env` password matches what you set during PostgreSQL install.
 
 **`FileNotFoundError` on xlsx**
 Confirm the file is named exactly `Online Retail.xlsx` (with space) and placed in `data/raw/`.
